@@ -27,9 +27,3 @@
 - 安全
 
 
-该手册内容基本上来源于网络资源，特别是：
-
-- 《葵花宝典》
-- [Java-Interview](https://github.com/crossoverJie/Java-Interview)
-- [《后端架构师技术图谱》](https://github.com/xingshaocheng/architect-awesome)
-- [Java-interview-questions](https://github.com/Homiss/Java-interview-questions)
