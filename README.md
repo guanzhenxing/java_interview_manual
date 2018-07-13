@@ -18,8 +18,8 @@
   - Spring系列
   - MyBatis
   - Hibernate
-- 数据库
-  - 基本理论
+- [数据库](./database/index.md)
+  - [基本理论](./database/basic.md)
   - MySQL
   - MongoDB
   - Redis
