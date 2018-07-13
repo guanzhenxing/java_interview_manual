@@ -20,8 +20,8 @@
   - Hibernate
 - [数据库](./database/index.md)
   - [基本理论](./database/basic.md)
-  - MySQL
-  - MongoDB
-  - Redis
+  - [MySQL](./database/mysql.md)
+  - [MongoDB](./database/mongodb.md)
+  - [Redis](./database/redis.md)
 - 分布式
 - 安全
