@@ -116,3 +116,13 @@ Fail-Fast即我们常说的快速失败,
 ## Fail-fast和Fail-safe有什么区别
 
 Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail->fast的，而java.util.concurrent中的集合类都为fail-safe的。当检测到正在遍历的集合的结构被改变时，Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。
+
+## 说出几点 Java 中使用 Collections 的最佳实践
+
+这是我在使用 Java 中 Collectionc 类的一些最佳实践：
+
+- 使用正确的集合类，例如，如果不需要同步列表，使用 ArrayList 而不是 Vector。
+- 优先使用并发集合，而不是对集合进行同步。并发集合提供更好的可扩展性。
+- 使用接口代表和访问集合，如使用List存储 ArrayList，使用 Map 存储 HashMap 等等。
+- 使用迭代器来循环集合。
+- 使用集合的时候使用泛型。
