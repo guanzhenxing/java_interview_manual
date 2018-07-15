@@ -15,13 +15,16 @@
 - [JavaWeb](./java-web/index.md)
   - [HTTP基础](./java-web/http.md)
   - [JavaWeb基础](./java-web/java-web-basic.md)
-  - Spring系列
+  - [Spring系列](./java-web/spring.md)
   - MyBatis
   - Hibernate
-- [数据库](./database/index.md)
-  - [基本理论](./database/basic.md)
-  - [MySQL](./database/mysql.md)
-  - [MongoDB](./database/mongodb.md)
-  - [Redis](./database/redis.md)
+- [数据库与缓存](./repository/index.md)
+  - [数据库基本理论](./repository/db_basic.md)
+  - [缓存基本理论](./repository/cache_basic.md)
+  - [MySQL](./repository/mysql.md)
+  - [MongoDB](./repository/mongodb.md)
+  - [Redis](./repository/redis.md)
+- [消息队列](./mq/index.md)
+  - [MQ基础](./mq/basic.md)
 - 分布式
 - 安全

@@ -14,4 +14,3 @@ IO 对 Java 应用的性能非常重要。理想情况下，你不应该在你�
 - 使用 NIO 和 NIO2
 - 在 finally 块中关闭流，或者使用 try-with-resource 语句。
 - 使用内存映射文件获取更快的 IO。
-

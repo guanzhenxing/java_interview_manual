@@ -36,6 +36,18 @@ Set和Map容器都有基于哈希存储和排序树的两种实现版本，基�
 
 poll() 和 remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。
 
+## List 和 Set 区别
+
+Set是最简单的一种集合。集合中的对象不按特定的方式排序，并且没有重复对象。
+
+- HashSet： HashSet类按照哈希算法来存取集合中的对象，存取速度比较快
+- TreeSet ：TreeSet类实现了SortedSet接口，能够对集合中的对象进行排序。
+
+List的特征是其元素以线性方式存储，集合中可以存放重复对象。
+
+- ArrayList() : 代表长度可以改变得数组。可以对元素进行随机的访问，向ArrayList()中插入与删除元素的速度慢。
+- LinkedList(): 在实现中采用链表数据结构。插入和删除速度快，访问速度慢。
+
 ## LinkedHashMap和PriorityQueue的区别
 
 PriorityQueue 是一个优先级队列,保证最高或者最低优先级的的元素总是在队列头部，但是 LinkedHashMap 维持的顺序是元素插入的顺序。当遍历一个 PriorityQueue 时，没有任何顺序保证，但是 LinkedHashMap 课保证遍历顺序是元素插入的顺序。
@@ -48,11 +60,51 @@ WeakHashMap 的工作与正常的 HashMap 类似，但是使用弱引用作为 k
 
 最明显的区别是 ArrrayList底层的数据结构是数组，支持随机访问，而 LinkedList 的底层数据结构是双向循环链表，不支持随机访问。使用下标访问一个元素，ArrayList 的时间复杂度是 O(1)，而 LinkedList 是 O(n)。
 
+相对于ArrayList，LinkedList的插入，添加，删除操作速度更快，因为当元素被添加到集合任意位置的时候，不需要像数组那样重新计算大小或者是更新索引。
+
+LinkedList比ArrayList更占内存，因为LinkedList为每一个节点存储了两个引用，一个指向前一个元素，一个指向下一个元素。
+
 ## ArrayList和Array有什么区别？
 
 Array可以容纳基本类型和对象，而ArrayList只能容纳对象。
 
 Array是指定大小的，而ArrayList大小是固定的
+
+## ArrayList 与 Vector 区别
+
+ArrayList和Vector在很多时候都很类似。
+
+- 两者都是基于索引的，内部由一个数组支持。
+- 两者维护插入的顺序，我们可以根据插入顺序来获取元素。
+- ArrayList和Vector的迭代器实现都是fail-fast的。
+- ArrayList和Vector两者允许null值，也可以使用索引值对元素进行随机访问。
+
+以下是ArrayList和Vector的不同点。
+
+- Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。
+- ArrayList比Vector快，它因为有同步，不会过载。
+- ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。
+
+## HashMap 和 Hashtable 的区别
+
+HashMap和Hashtable都实现了Map接口，因此很多特性非常相似。但是，他们有以下不同点：
+
+- HashMap允许键和值是null，而Hashtable不允许键或者值是null。
+- Hashtable是同步的，而HashMap不是。因此，HashMap更适合于单线程环境，而Hashtable适合于多线程环境。
+- HashMap提供了可供应用迭代的键的集合，因此，HashMap是快速失败的。另一方面，Hashtable提供了对键的列举(Enumeration)。
+- 一般认为Hashtable是一个遗留的类。
+
+## HashSet 和 HashMap 区别
+
+- HashSet实现了Set接口，它不允许集合中有重复的值。它存储的是对象
+- HashMap实现了Map接口，Map接口对键值对进行映射。Map中不允许重复的键。Map接口有两个基本的实现，HashMap和TreeMap。
+
+## HashMap 和 ConcurrentHashMap 的区别
+
+- ConcurrentHashMap对整个桶数组进行了分段，而HashMap则没有。
+- ConcurrentHashMap在每一个分段上都用锁进行保护，从而让锁的粒度更精细一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。
+
+引入ConcurrentHashMap是为了在同步集合HashTable之间有更好的选择，HashTable与HashMap、ConcurrentHashMap主要的区别在于HashMap不是同步的、线程不安全的和不适合应用于多线程并发环境下，而ConcurrentHashMap是线程安全的集合容器，特别是在多线程和并发环境中，通常作为Map的主要实现。
 
 ## ArrayList和HashMap默认大小？
 
@@ -93,25 +145,32 @@ Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于
 
 ArrayMap是Android SDK中提供的,非Android开发者可以略过。
 
-ArrayMap是用两个数组来模拟map,更少的内存占用空间,更高的效率。 
+ArrayMap是用两个数组来模拟map,更少的内存占用空间,更高的效率。
 
-具体参考这篇文章:ArrayMap VS HashMap：http://lvable.com/?p=217%5D
+具体参考这篇文章:ArrayMap VS HashMap：`http://lvable.com/?p=217%5D`
 
 ## HashMap的实现原理
 
-1 HashMap概述： HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。 
-
-2 HashMap的数据结构： 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
+1. HashMap概述： HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。
+1. HashMap的数据结构： 在java编程语言中，最基本的结构就是两种，一个是数组，另外一个是模拟指针（引用），所有的数据结构都可以用这两个基本结构来构造的，HashMap也不例外。HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体。
 
 当我们往Hashmap中put元素时,首先根据key的hashcode重新计算hash值,根绝hash值得到这个元素在数组中的位置(下标),如果该数组在该位置上已经存放了其他元素,那么在这个位置上的元素将以链表的形式存放,新加入的放在链头,最先加入的放入链尾.如果数组中该位置没有元素,就直接将该元素放到数组的该位置上.
 
 需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O(n)到O(logn)
 
+## ConcurrentHashMap 的工作原理及代码实现
+
+ConcurrentHashMap具体是怎么实现线程安全的呢，肯定不可能是每个方法加synchronized，那样就变成了HashTable。
+
+从ConcurrentHashMap代码中可以看出，它引入了一个“分段锁”的概念，具体可以理解为把一个大的Map拆分成N个小的HashTable，根据key.hashCode()来决定把key放到哪个HashTable中。
+
+在ConcurrentHashMap中，就是把Map分成了N个Segment，put和get的时候，都是现根据key.hashCode()算出放到哪个Segment中。
+
 ## 你了解Fail-Fast机制吗
 
 Fail-Fast即我们常说的快速失败,
 
-更多内容参看fail-fast机制：http://blog.csdn.net/chenssy/article/details/38151189
+更多内容参看fail-fast机制：`http://blog.csdn.net/chenssy/article/details/38151189`
 
 ## Fail-fast和Fail-safe有什么区别
 
