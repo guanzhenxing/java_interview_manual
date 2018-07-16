@@ -1,6 +1,6 @@
 # Java面试手册
 
-《Java面试手册》整理了从业到现在看到的、经历过的一些Java面试题。
+《Java面试手册》整理了从业到现在看到的、经历过的一些Java面试题。这些面试题的主要来源是一些网站还有github上的内容。
 
 主要分为以下部分：
 
@@ -31,5 +31,12 @@
   - [MQ基础](./mq/basic.md)
 - [分布式](./distributed/index.md)
 - [微服务](./mic-service/index.md)
-- 安全和性能
+- [安全和性能](./security-performance/index.md)
+  - [安全](./security-performance/security.md)
 - [业务](./business/index.md)
+
+---
+
+主要参考：
+
+- [Java面试通关要点汇总集【终极版】](http://blog.720ui.com/2018/java_interview_final/)
