@@ -18,15 +18,17 @@
   - [Spring系列](./java-web/spring.md)
   - MyBatis
   - Hibernate
-- [数据库与缓存](./repository/index.md)
-  - [数据库基本理论](./repository/db_basic.md)
-  - [缓存基本理论](./repository/cache_basic.md)
-  - [MySQL](./repository/mysql.md)
-  - [MongoDB](./repository/mongodb.md)
-  - [Redis](./repository/redis.md)
+  - [Tomcat](./java-web/tomcat.md)
+- [数据库与缓存](./db-cache/index.md)
+  - [数据库基本理论](./db-cache/db_basic.md)
+  - [缓存基本理论](./db-cache/cache_basic.md)
+  - [分库分表](./db-cache/sharding.md)
+  - [MySQL](./db-cache/mysql.md)
+  - [MongoDB](./db-cache/mongodb.md)
+  - [Redis](./db-cache/redis.md)
 - [消息队列](./mq/index.md)
   - [MQ基础](./mq/basic.md)
-- 分布式
-- 微服务
-- 安全
-- 业务
+- [分布式](./distributed/index.md)
+- [微服务](./mic-service/index.md)
+- 安全和性能
+- [业务](./business/index.md)
