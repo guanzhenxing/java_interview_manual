@@ -149,6 +149,10 @@ ArrayMap是用两个数组来模拟map,更少的内存占用空间,更高的效�
 
 具体参考这篇文章:ArrayMap VS HashMap：`http://lvable.com/?p=217%5D`
 
+## 如何决定选用HashMap还是TreeMap？
+
+对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。
+
 ## HashMap的实现原理
 
 1. HashMap概述： HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。
@@ -185,3 +189,15 @@ Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受
 - 使用接口代表和访问集合，如使用List存储 ArrayList，使用 Map 存储 HashMap 等等。
 - 使用迭代器来循环集合。
 - 使用集合的时候使用泛型。
+
+## BlockingQueue是什么？
+
+Java.util.concurrent.BlockingQueue是一个队列，在进行检索或移除一个元素的时候，它会等待队列变为非空；当在添加一个元素时，它会等待队列中的可用空间。BlockingQueue接口是Java集合框架的一部分，主要用于实现生产者-消费者模式。我们不需要担心等待生产者有可用的空间，或消费者有可用的对象，因为它都在BlockingQueue的实现类中被处理了。Java提供了集中BlockingQueue的实现，比如ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue,、SynchronousQueue
+
+## 队列和栈是什么，列出它们的区别？
+
+栈和队列两者都被用来预存储数据。java.util.Queue是一个接口，它的实现类在Java并发包中。队列允许先进先出（FIFO）检索元素，但并非总是这样。Deque接口允许从两端检索元素。
+
+栈与队列很相似，但它允许对元素进行后进先出（LIFO）进行检索。
+
+Stack是一个扩展自Vector的类，而Queue是一个接口。
