@@ -11,12 +11,13 @@
   - [多线程](./java-basic/multithread.md)
   - [JVM](./java-basic/jvm.md)
   - [数据结构与算法](./java-basic/data-structures-and-algorithms.md)
+  - [NIO](./java-basic/nio.md)
 - [设计模式](./design-pattern/index.md)
 - [JavaWeb](./java-web/index.md)
   - [HTTP基础](./java-web/http.md)
   - [JavaWeb基础](./java-web/java-web-basic.md)
   - [Spring系列](./java-web/spring.md)
-  - MyBatis
+  - [MyBatis](./java-web/mybatis.md)
   - Hibernate
   - [Tomcat](./java-web/tomcat.md)
 - [数据库与缓存](./db-cache/index.md)
