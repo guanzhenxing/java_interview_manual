@@ -231,7 +231,7 @@ Spring AOP使用动态代理技术在运行期织入增强代码。使用两种�
 
     在spring中默认情况下使用JDK动态代理实现AOP,如果proxy-target-class设置为true或者使用了优化策略那么会使用CGLIB来创建动态代理.Spring　AOP在这两种方式的实现上基本一样．以JDK代理为例，会使用JdkDynamicAopProxy来创建代理，在invoke()方法首先需要织入到当前类的增强器封装到拦截器链中，然后递归的调用这些拦截器完成功能的织入．最终返回代理对象．
 
-    http://zhengjianglong.cn/2015/12/12/Spring/spring-source-aop/
+    `http://zhengjianglong.cn/2015/12/12/Spring/spring-source-aop/`
 
 ## 如何自定义注解实现功能
 

@@ -131,4 +131,4 @@ Drop命令从数据库中删除表，所有的数据行，索引和权限也会�
 |意向共享锁（IS） | 兼容      | 冲突       | 兼容            |兼容 |
 |意向排他锁（IX） | 冲突     | 冲突       | 兼容            |兼容|
 
-参考地址：http://www.cnblogs.com/ggjucheng/archive/2012/11/14/2770445.html
+参考地址：`http://www.cnblogs.com/ggjucheng/archive/2012/11/14/2770445.html`
