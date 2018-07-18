@@ -106,3 +106,9 @@ Mybatis将所有Xml配置信息都封装到All-In-One重量级对象Configuratio
 ## 为什么说Mybatis是半自动ORM映射工具？它与全自动的区别在哪里？
 
 Hibernate属于全自动ORM映射工具，使用Hibernate查询关联对象或者关联集合对象时，可以根据对象关系模型直接获取，所以它是全自动的。而Mybatis在查询关联对象或关联集合对象时，需要手动编写sql来完成，所以，称之为半自动ORM映射工具。
+
+## 简单的说一下MyBatis的一级缓存和二级缓存？
+
+Mybatis首先去缓存中查询结果集，如果没有则查询数据库，如果有则从缓存取出返回结果集就不走数据库。Mybatis内部存储缓存使用一个HashMap，key为hashCode+sqlId+Sql语句。value为从查询出来映射生成的java对象
+
+Mybatis的二级缓存即查询缓存，它的作用域是一个mapper的namespace，即在同一个namespace中查询sql可以从缓存中获取数据。二级缓存是可以跨SqlSession的。

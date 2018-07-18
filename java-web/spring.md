@@ -116,21 +116,44 @@ Spring框架对单例的支持是采用单例注册表的方式进行实现的�
 
 ## 解释Spring框架中bean的生命周期
 
-Spring容器读取XML文件中bean的定义并实例化bean。
+ApplicationContext容器中，Bean的生命周期流程如上图所示，流程大致如下：
 
-Spring根据bean的定义设置属性值。
+![Spring框架中bean的生命周期](../images/687474703a2f2f7374617469632e7a7962756c756f2e636f6d2f686f6d6973732f75726e75686337656271356a343831656b617875787067652f696d6167655f31626e35326663733376756f31767376316566617171636e31736d2e706e67.png)
 
-如果该Bean实现了BeanNameAware接口，Spring将bean的id传递给setBeanName()方法。
+1.首先容器启动后，会对scope为singleton且非懒加载的bean进行实例化，
 
-如果该Bean实现了BeanFactoryAware接口，Spring将beanfactory传递给setBeanFactory()方法。
+2.按照Bean定义信息配置信息，注入所有的属性，
 
-如果任何bean BeanPostProcessors 和该bean相关，Spring调用postProcessBeforeInitialization()方法。
+3.如果Bean实现了BeanNameAware接口，会回调该接口的setBeanName()方法，传入该Bean的id，此时该Bean就获得了自己在配置文件中的id，
 
-如果该Bean实现了InitializingBean接口，调用Bean中的afterPropertiesSet方法。如果bean有初始化函数声明，调用相应的初始化方法。
+4.如果Bean实现了BeanFactoryAware接口,会回调该接口的setBeanFactory()方法，传入该Bean的BeanFactory，这样该Bean就获得了自己所在的BeanFactory，
 
-如果任何bean BeanPostProcessors 和该bean相关，调用postProcessAfterInitialization()方法。
+5.如果Bean实现了ApplicationContextAware接口,会回调该接口的setApplicationContext()方法，传入该Bean的ApplicationContext，这样该Bean就获得了自己所在的ApplicationContext，
 
-如果该bean实现了DisposableBean，调用destroy()方法。
+6.如果有Bean实现了BeanPostProcessor接口，则会回调该接口的postProcessBeforeInitialzation()方法，
+
+7.如果Bean实现了InitializingBean接口，则会回调该接口的afterPropertiesSet()方法，
+
+8.如果Bean配置了init-method方法，则会执行init-method配置的方法，
+
+9.如果有Bean实现了BeanPostProcessor接口，则会回调该接口的postProcessAfterInitialization()方法，
+
+10.经过流程9之后，就可以正式使用该Bean了,对于scope为singleton的Bean,Spring的ioc容器中会缓存一份该bean的实例，而对于scope为prototype的Bean,每次被调用都会new一个新的对象，期生命周期就交给调用方管理了，不再是Spring容器进行管理了
+
+11.容器关闭后，如果Bean实现了DisposableBean接口，则会回调该接口的destroy()方法，
+
+12.如果Bean配置了destroy-method方法，则会执行destroy-method配置的方法，至此，整个Bean的生命周期结束
+
+## Resource 是如何被查找、加载的？
+
+Resource 接口是 Spring 资源访问策略的抽象，它本身并不提供任何资源访问实现，具体的资源访问由该接口的实现类完成——每个实现类代表一种资源访问策略。 Spring 为 Resource 接口提供了如下实现类：
+
+- UrlResource：访问网络资源的实现类。
+- ClassPathResource：访问类加载路径里资源的实现类。
+- FileSystemResource：访问文件系统里资源的实现类。
+- ServletContextResource：访问相对于 ServletContext 路径里的资源的实现类：
+- InputStreamResource：访问输入流资源的实现类。
+- ByteArrayResource：访问字节数组资源的实现类。 这些 Resource 实现类，针对不同的的底层资源，提供了相应的资源访问逻辑，并提供便捷的包装，以利于客户端程序的资源访问。
 
 ## 解释自动装配的各种模式？
 
