@@ -535,4 +535,24 @@ synchronize 很多都称之为重量锁，JDK1.6 中对 synchronize 进行了各
 
 ## volatile 实现原理
 
+（禁止指令重排、刷新内存）
+
+## synchronized 实现原理
+
+（对象监视器）
+
+## 说说 Semaphore 原理
+
+## 说说 Exchanger 原理
+
 ## 线程的生命周期
+
+## 重入锁的概念，重入锁为什么可以防止死锁
+
+## 如何检查死锁（通过jConsole检查死锁）
+
+## AQS同步队列
+
+## 什么是ABA问题，出现ABA问题JDK是如何解决的
+
+## 乐观锁的业务场景及实现方式

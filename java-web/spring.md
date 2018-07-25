@@ -60,6 +60,10 @@ spring委托给具体的事务处理器实现。实现了一个抽象和适配�
 
 PlatformTransactionManager实现了TransactionInterception接口，让其与TransactionProxyFactoryBean结合起来，形成一个Spring声明式事务处理的设计体系。
 
+## 有没有遇到过Spring事务失效的情况？在什么情况下Spring的事务是失效的？
+
+参考：[面试必备技能：JDK动态代理给Spring事务埋下的坑！](https://mp.weixin.qq.com/s?__biz=MzI1NDQ3MjQxNA==&mid=2247484940&idx=1&sn=0a0a7198e96f57d610d3421b19573002&chksm=e9c5ffbddeb276ab64ff3b3efde003193902c69acda797fdc04124f6c2a786255d58817b5a5c&scene=21#wechat_redirect)
+
 ## Spring MVC 运行流程
 
 第一步：发起请求到前端控制器(DispatcherServlet)

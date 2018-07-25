@@ -32,11 +32,7 @@ Map保存键值对（key-value pair）映射，映射关系可以是一对一或
 
 Set和Map容器都有基于哈希存储和排序树的两种实现版本，基于哈希存储的版本理论存取时间复杂度为O(1)，而基于排序树版本的实现在插入或删除元素时会按照元素或元素的键（key）构成排序树从而达到排序和去重的效果。
 
-## poll()方法和remove()方法区别？
-
-poll() 和 remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。
-
-## List 和 Set 区别
+## List和Set区别
 
 Set是最简单的一种集合。集合中的对象不按特定的方式排序，并且没有重复对象。
 
@@ -70,7 +66,7 @@ Array可以容纳基本类型和对象，而ArrayList只能容纳对象。
 
 Array是指定大小的，而ArrayList大小是固定的
 
-## ArrayList 与 Vector 区别
+## ArrayList与Vector区别
 
 ArrayList和Vector在很多时候都很类似。
 
@@ -85,7 +81,7 @@ ArrayList和Vector在很多时候都很类似。
 - ArrayList比Vector快，它因为有同步，不会过载。
 - ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。
 
-## HashMap 和 Hashtable 的区别
+## HashMap和Hashtable的区别
 
 HashMap和Hashtable都实现了Map接口，因此很多特性非常相似。但是，他们有以下不同点：
 
@@ -94,21 +90,31 @@ HashMap和Hashtable都实现了Map接口，因此很多特性非常相似。但�
 - HashMap提供了可供应用迭代的键的集合，因此，HashMap是快速失败的。另一方面，Hashtable提供了对键的列举(Enumeration)。
 - 一般认为Hashtable是一个遗留的类。
 
-## HashSet 和 HashMap 区别
+## HashSet和HashMap区别
 
 - HashSet实现了Set接口，它不允许集合中有重复的值。它存储的是对象
 - HashMap实现了Map接口，Map接口对键值对进行映射。Map中不允许重复的键。Map接口有两个基本的实现，HashMap和TreeMap。
 
-## HashMap 和 ConcurrentHashMap 的区别
+## HashMap和ConcurrentHashMap的区别
 
 - ConcurrentHashMap对整个桶数组进行了分段，而HashMap则没有。
 - ConcurrentHashMap在每一个分段上都用锁进行保护，从而让锁的粒度更精细一些，并发性能更好，而HashMap没有锁机制，不是线程安全的。
 
 引入ConcurrentHashMap是为了在同步集合HashTable之间有更好的选择，HashTable与HashMap、ConcurrentHashMap主要的区别在于HashMap不是同步的、线程不安全的和不适合应用于多线程并发环境下，而ConcurrentHashMap是线程安全的集合容器，特别是在多线程和并发环境中，通常作为Map的主要实现。
 
-## ArrayList和HashMap默认大小？
+## Comparator和Comparable的区别？
 
-在 Java 7 中，ArrayList 的默认大小是 10 个元素，HashMap 的默认大小是16个元素（必须是2的幂）。这就是 Java 7 中 ArrayList 和 HashMap 类的代码片段
+Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于定义用户定制的顺序。Comparable 总是只有一个，但是可以有多个 comparator 来定义对象的顺序。
+
+## poll()方法和remove()方法区别？
+
+poll() 和 remove() 都是从队列中取出一个元素，但是 poll() 在获取元素失败的时候会返回空，但是 remove() 失败的时候会抛出异常。
+
+## ArrayList、HashMa和LinkedList的默认空间是多少？扩容机制是什么
+
+- ArrayList 的默认大小是 10 个元素。扩容点规则是，新增的时候发现容量不够用了，就去扩容；扩容大小规则是：扩容后的大小= 原始大小+原始大小/2 + 1。
+- HashMap 的默认大小是16个元素（必须是2的幂）。扩容因子默认0.75，扩容机制.(当前大小 和 当前容量 的比例超过了 扩容因子，就会扩容，扩容后大小为 一倍。例如：初始大小为 16 ，扩容因子 0.75 ，当容量为12的时候，比例已经是0.75 。触发扩容，扩容后的大小为 32.)
+- LinkedList 是一个双向链表，没有初始化大小，也没有扩容的机制，就是一直在前面或者后面新增就好。
 
 ```Java
 private static final int DEFAULT_CAPACITY = 10;
@@ -116,10 +122,6 @@ private static final int DEFAULT_CAPACITY = 10;
 //from HashMap.java JDK 7
 static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
 ```
-
-## Comparator和Comparable的区别？
-
-Comparable 接口用于定义对象的自然顺序，而 comparator 通常用于定义用户定制的顺序。Comparable 总是只有一个，但是可以有多个 comparator 来定义对象的顺序。
 
 ## 如何实现集合排序？
 
@@ -162,6 +164,20 @@ ArrayMap是用两个数组来模拟map,更少的内存占用空间,更高的效�
 
 需要注意Jdk 1.8中对HashMap的实现做了优化,当链表中的节点数据超过八个之后,该链表会转为红黑树来提高查询效率,从原来的O(n)到O(logn)
 
+也可以参考：
+
+- [深入Java集合学习系列：HashMap的实现原理](http://zhangshixi.iteye.com/blog/672697)
+- [深入理解HashMap](https://github.com/guohongjun/HashMap-System-Learning)
+
+## 解决Hash冲突的方法有哪些
+
+开放地址法、链地址法、再哈希法、建立公共溢出区等
+
+参考：
+
+- [java 解决Hash(散列)冲突的四种方法--开放定址法(线性探测,二次探测,伪随机探测)、链地址法、再哈希、建立公共溢出区](https://blog.csdn.net/qq_27093465/article/details/52269862)
+- [Java 8中HashMap冲突解决](https://blog.csdn.net/cpcpcp123/article/details/52744331)
+
 ## ConcurrentHashMap 的工作原理及代码实现
 
 ConcurrentHashMap具体是怎么实现线程安全的呢，肯定不可能是每个方法加synchronized，那样就变成了HashTable。
@@ -201,3 +217,15 @@ Java.util.concurrent.BlockingQueue是一个队列，在进行检索或移除一�
 栈与队列很相似，但它允许对元素进行后进先出（LIFO）进行检索。
 
 Stack是一个扩展自Vector的类，而Queue是一个接口。
+
+## 多线程情况下HashMap死循环的问题
+
+可以参考：[疫苗：JAVA HASHMAP的死循环](https://coolshell.cn/articles/9606.html)
+
+## HashMap出现Hash DOS攻击的问题
+
+可以参考：[HASH COLLISION DOS 问题](https://coolshell.cn/articles/6424.html)
+
+## Java Collections和Arrays的sort方法默认的排序方法是什么？
+
+参考：[Collections.sort()和Arrays.sort()排序算法选择](https://blog.csdn.net/TimHeath/article/details/68930482)

@@ -84,3 +84,5 @@ Java Web开发中的监听器（listener）就是application、session、request
 
 - session超时（可以在web.xml中通过`<session-config>/<session-timeout>`标签配置超时时间）；
 - 通过调用session对象的invalidate()方法使session失效。
+
+## Servlet的生命周期

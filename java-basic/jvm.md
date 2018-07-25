@@ -209,3 +209,5 @@ Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo
 ## Minor GC与Full GC分别在什么时候发生？
 
 新生代内存不够用时候发生MGC也叫YGC，JVM内存不够的时候发生FGC
+
+## 对象头，详细讲下

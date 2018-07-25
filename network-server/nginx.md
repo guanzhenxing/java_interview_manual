@@ -93,5 +93,11 @@ nginx用这个方法是底下的worker进程抢注用户的要求，同时搭配
 
 负载均衡主要解决网络拥塞问题，提高服务器响应速度，服务就近提供，达到更好的访问质量，减少后台服务器大并发压力
 
+## Nginx几种常见的负载均衡策略
+
+## Nginx服务器上的Master和Worker进程分别是什么
+
+## 使用“反向代理服务器”的优点是什么？
+
 ---
-以上来源：[Nginx面试题](https://github.com/Homiss/Java-interview-questions/blob/master/Nginx/Nginx%E9%9D%A2%E8%AF%95%E9%A2%98.md)
+参考：[Nginx面试题](https://github.com/Homiss/Java-interview-questions/blob/master/Nginx/Nginx%E9%9D%A2%E8%AF%95%E9%A2%98.md)
