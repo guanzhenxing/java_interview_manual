@@ -4,6 +4,8 @@
 
 这些面试题的主要来源是一些网站还有github上的内容，由于平常在收藏到“印象笔记”中的时候没有保留来源出处，如果有介意版权的可以联系我。
 
+github地址为：`https://github.com/guanzhenxing/java_interview_manual`
+
 主要分为以下部分：
 
 - [Java基础](./java-basic/index.md)
