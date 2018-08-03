@@ -533,9 +533,16 @@ synchronize 很多都称之为重量锁，JDK1.6 中对 synchronize 进行了各
 
 ## 线程池的几种方式与使用场景
 
+参考：[线程池的种类，区别和使用场景](https://blog.csdn.net/PORSCHE_GT3RS/article/details/80261720)
+
 ## volatile 实现原理
 
-（禁止指令重排、刷新内存）
+禁止指令重排、刷新内存
+
+参考：
+
+- [【死磕Java并发】—–深入分析volatile的实现原理](http://cmsblogs.com/?p=2092)
+- [深入分析Volatile的实现原理](https://blog.csdn.net/eff666/article/details/67640648)
 
 ## synchronized 实现原理
 

@@ -211,3 +211,7 @@ Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo
 新生代内存不够用时候发生MGC也叫YGC，JVM内存不够的时候发生FGC
 
 ## 对象头，详细讲下
+
+- [【Java对象解析】不得不了解的对象头](https://blog.csdn.net/zhoufanyang_china/article/details/54601311)
+- [JVM源码分析之java对象头实现](https://www.jianshu.com/p/9c19eb0ea4d8)
+- [JVM——深入分析对象的内存布局](https://www.cnblogs.com/zhengbin/p/6490953.html)

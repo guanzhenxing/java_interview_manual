@@ -384,4 +384,8 @@ Java 中，可以使用 SimpleDateFormat 类或者 joda-time 库来格式日期�
 
 ## 什么要重写hashcode()和equals()以及他们之间的区别与关系？
 
-## Object的hashcode()是怎么计算的？
+可以参考：
+
+- [为什么要重写hashCode()方法和equals()方法以及如何进行重写](https://blog.csdn.net/xlgen157387/article/details/63683882)
+- [Java hashCode() 和 equals()的若干问题解答](https://www.cnblogs.com/skywang12345/p/3324958.html)
+- [Java中equals()与hashCode()方法详解](http://bijian1013.iteye.com/blog/1972404)
