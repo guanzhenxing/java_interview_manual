@@ -271,7 +271,7 @@ permgen space、heap space 错误。
 
 详见 [Java 内存溢出（java.lang.OutOfMemoryError）的常见情况和处理方式总结](http://outofmemory.cn/c/java-outOfMemoryError/)。
 
-## JDK 1.8之后Perm Space有哪些变动? MetaSpace⼤⼩默认是⽆限的么? 还是你们会通过什么⽅式来指定⼤⼩?
+## JDK 1.8之后Perm Space有哪些变动? MetaSpace⼤⼩默认是⽆限的么? 还是你们会通过什么⽅式来指定⼤⼩？
 
 JDK 1.8后用元空间替代了 Perm Space；字符串常量存放到堆内存中。
 
