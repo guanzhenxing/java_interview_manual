@@ -36,6 +36,14 @@
 
 上面的语句中变量str放在栈上，用new创建出来的字符串对象放在堆上，而”hello”这个字面量放在静态区。
 
+## Perm Space中保存什么数据？会引起OutOfMemory吗？
+
+Perm Space中保存的是加载class文件。
+
+会引起，出现异常可以设置 -XX:PermSize 的大小。JDK 1.8后，字符串常量不存放在永久带，而是在堆内存中，JDK8以后没有永久代概念，而是用元空间替代，元空间不存在虚拟机中，二是使用本地内存。
+
+详细查看[Java8内存模型—永久代(PermGen)和元空间(Metaspace)](https://www.cnblogs.com/paddix/p/5309550.html/)
+
 ## 什么是类的加载
 
 类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个java.lang.Class对象，用来封装类在方法区内的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。
@@ -47,6 +55,16 @@
 - 启动类加载器：Bootstrap ClassLoader，负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库
 - 扩展类加载器：Extension ClassLoader，该加载器由sun.misc.Launcher$ExtClassLoader实现，它负责加载DK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。
 - 应用程序类加载器：Application ClassLoader，该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器
+
+双亲委派机制：类加载器收到类加载请求，自己不加载，向上委托给父类加载，父类加载不了，再自己加载。优势就是避免Java核心API篡改。
+
+## 如何⾃定义⼀个类加载器？你使⽤过哪些或者你在什么场景下需要⼀个⾃ 定义的类加载器吗？
+
+自定义类加载的意义：
+
+1. 加载特定路径的class文件
+1. 加载一个加密的网络class文件
+1. 热部署加载class文件
 
 ## 描述一下JVM加载class文件的原理机制？
 
@@ -65,9 +83,9 @@ JVM中类的装载是由类加载器（ClassLoader）和它的子类来实现的
 ## Java对象创建过程
 
 1. JVM遇到一条新建对象的指令时首先去检查这个指令的参数是否能在常量池中定义到一个类的符号引用。然后加载这个类（类加载过程在后边讲）
-1. 为对象分配内存。一种办法“指针碰撞”、一种办法“空闲列表”，最终常用的办法“本地线程缓冲分配(TLAB)”
-1. 将除对象头外的对象内存空间初始化为0
-1. 对对象头进行必要设置
+2. 为对象分配内存。一种办法“指针碰撞”、一种办法“空闲列表”，最终常用的办法“本地线程缓冲分配(TLAB)”
+3. 将除对象头外的对象内存空间初始化为0
+4. 对对象头进行必要设置
 
 ## 类的生命周期
 
@@ -148,6 +166,18 @@ Java程序员不用担心内存管理，因为垃圾收集器会自动进行管�
 - -XX:InitialTenuringThreshold / -XX:MaxTenuringThreshold：设置老年代阀值的初始值和最大值
 - -XX:TargetSurvivorRatio：设置幸存区的目标使用率
 
+## 做GC时，⼀个对象在内存各个Space中被移动的顺序是什么？
+
+标记清除法，复制算法，标记整理、分代算法。
+
+新生代一般采用复制算法 GC，老年代使用标记整理算法。
+
+垃圾收集器：串行新生代收集器、串行老生代收集器、并行新生代收集器、并行老年代收集器。
+
+CMS（Current Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器，它是一种并发收集器，采用的是Mark-Sweep算法。
+
+详见 [Java GC机制](http://www.cnblogs.com/dolphin0520/p/3783345.html)。
+
 ## 你知道哪些垃圾回收算法？
 
 GC最基础的算法有三种： 标记 -清除算法、复制算法、标记-压缩算法，我们常用的垃圾回收器一般都采用分代收集算法。
@@ -206,6 +236,14 @@ Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo
 - MAT，Memory Analyzer Tool，一个基于Eclipse的内存分析工具，是一个快速、功能丰富的Java heap分析工具，它可以帮助我们查找内存泄漏和减少内存消耗
 - GChisto，一款专业分析gc日志的工具
 
+## jstack 是⼲什么的? jstat 呢？如果线上程序周期性地出现卡顿，你怀疑可 能是 GC 导致的，你会怎么来排查这个问题？线程⽇志⼀般你会看其中的什么 部分？
+
+jstack 用来查询 Java 进程的堆栈信息。
+
+jvisualvm 监控内存泄露，跟踪垃圾回收、执行时内存、cpu分析、线程分析。
+
+详见[Java jvisualvm简要说明](https://blog.csdn.net/a19881029/article/details/8432368/)，可参考 [线上FullGC频繁的排查](https://blog.csdn.net/wilsonpeng3/article/details/70064336/)。
+
 ## Minor GC与Full GC分别在什么时候发生？
 
 新生代内存不够用时候发生MGC也叫YGC，JVM内存不够的时候发生FGC
@@ -215,3 +253,34 @@ Sun JDK监控和故障处理命令有jps jstat jmap jhat jstack jinfo
 - [【Java对象解析】不得不了解的对象头](https://blog.csdn.net/zhoufanyang_china/article/details/54601311)
 - [JVM源码分析之java对象头实现](https://www.jianshu.com/p/9c19eb0ea4d8)
 - [JVM——深入分析对象的内存布局](https://www.cnblogs.com/zhengbin/p/6490953.html)
+
+## 你知道哪些或者你们线上使⽤什么GC策略？它有什么优势，适⽤于什么场景？
+
+参考：[参考 触发JVM进行Full GC的情况及应对策略](https://blog.csdn.net/chenleixing/article/details/46706039/)
+
+## 你有没有遇到过OutOfMemory问题？你是怎么来处理这个问题的？处理 过程中有哪些收获？
+
+permgen space、heap space 错误。
+
+常见的原因
+
+- 内存加载的数据量太大：一次性从数据库取太多数据；
+- 集合类中有对对象的引用，使用后未清空，GC不能进行回收；
+- 代码中存在循环产生过多的重复对象；
+- 启动参数堆内存值小。
+
+详见 [Java 内存溢出（java.lang.OutOfMemoryError）的常见情况和处理方式总结](http://outofmemory.cn/c/java-outOfMemoryError/)。
+
+## JDK 1.8之后Perm Space有哪些变动? MetaSpace⼤⼩默认是⽆限的么? 还是你们会通过什么⽅式来指定⼤⼩?
+
+JDK 1.8后用元空间替代了 Perm Space；字符串常量存放到堆内存中。
+
+MetaSpace大小默认没有限制，一般根据系统内存的大小。JVM会动态改变此值。
+
+-XX:MetaspaceSize：分配给类元数据空间（以字节计）的初始大小（Oracle逻辑存储上的初始高水位，the initial high-water-mark）。此值为估计值，MetaspaceSize的值设置的过大会延长垃圾回收时间。垃圾回收过后，引起下一次垃圾回收的类元数据空间的大小可能会变大。
+
+-XX:MaxMetaspaceSize：分配给类元数据空间的最大值，超过此值就会触发Full GC，此值默认没有限制，但应取决于系统内存的大小。JVM会动态地改变此值。
+
+## StackOverflow异常有没有遇到过？⼀般你猜测会在什么情况下被触发？如何指定⼀个线程的堆栈⼤⼩？⼀般你们写多少？
+
+栈内存溢出，一般由栈内存的局部变量过爆了，导致内存溢出。出现在递归方法，参数个数过多，递归过深，递归没有出口。
