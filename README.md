@@ -47,6 +47,7 @@ github地址为：`https://github.com/guanzhenxing/java_interview_manual`
 - [软件工程](./software_engineering/index.md)
   - [UML](./software_engineering-server/uml.md)
 - [业务](./business/index.md)
+- [操作系统](./system/index.md)
 
 ---
 
