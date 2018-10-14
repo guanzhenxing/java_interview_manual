@@ -550,11 +550,37 @@ synchronize 很多都称之为重量锁，JDK1.6 中对 synchronize 进行了各
 
 ## 说说 Semaphore 原理
 
+Semaphore内部通过AQS的共享锁实现，使用了许可证(permits) 作为锁的计数。state保存剩余permits数量
+
+#### 获取
+
+获取锁时将申请一个许可，如果剩余的许可足够分配，即state大于1的情况，通过自旋CAS操作设置state = state -1。否则返回失败
+
+#### 释放
+
+释放锁的过程与获取锁过程相反
+
 ## 说说 Exchanger 原理
 
 ## 线程的生命周期
 
-## 重入锁的概念，重入锁为什么可以防止死锁
+## 重入锁的概念
+
+Java 1.5的JUC中提供了ReentrantLock这个可重入独占锁，该锁通过AQS独占锁实现，重入锁可在同一线程内多次获取。
+
+#### 获取
+
+如果锁没有被获取，即state为0的情况下，通过CAS操作将state设置为1，并将当前线程设置为ExclusiveOwnerThread。
+
+若锁已被获取，即state不为0的情况，首先判断ExclusiveOwnerThread是非为当前线程，如果为当前线程则将state加1，否则获取锁失败
+
+#### 释放
+
+释放锁时检查ExclusiveOwnerThread和state，通过后将state减1。当state为0时锁将回到空闲状态，并设置ExclusiveOwnerThread为null，即锁可被任意线程获取
+
+#### 死锁问题
+
+重入锁不可防止死锁，仅仅是同一线程可以重复获得锁。如释放不当仍然会引起死锁
 
 ## 如何检查死锁（通过jConsole检查死锁）
 
